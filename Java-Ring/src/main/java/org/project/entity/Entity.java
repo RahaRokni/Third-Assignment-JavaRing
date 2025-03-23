@@ -1,7 +1,11 @@
 package org.project.entity;
 
+import org.project.entity.enemies.Enemy;
+
 public interface Entity {
+
     void attack(Entity target);
+    public int getHp();
 
     void defend();
 
@@ -14,6 +18,8 @@ public interface Entity {
     int getMaxHP();
 
     int getMaxMP();
+
+    String getName();
 
     /*
     TODO: ADD OTHER REQUIRED AND BONUS METHODS

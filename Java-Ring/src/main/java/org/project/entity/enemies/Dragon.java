@@ -3,22 +3,20 @@ package org.project.entity.enemies;
 import org.project.entity.Entity;
 import org.project.object.weapons.Weapon;
 
-public  class Skeleton extends Enemy {
-    private boolean hasResurrected = false;
+public class Dragon extends Enemy {
 
-    public Skeleton(String name ,int hp, int mp, Weapon weapon) {
-        super(name ,hp, mp, weapon);
+    public Dragon(String name ,int hp, int mp, Weapon weapon) {
+        super(name,hp, mp, weapon);
     }
 
     @Override
     public void useAbility(Entity target) {
-        System.out.println("Skeleton ☠️ attacks with its weapon!");
-        if (this.getHp() == 0 && !hasResurrected) {
-            resurrectSkeleton();
-            this.hasResurrected = true;
-            System.out.println("Skeleton ☠️ resurrects with " + this.getHp() + " HP!");
-        }
+        System.out.println("Dragon uses its fiery breath, bypassing all defenses!");
+        int damage = 30;
+        target.takeDamage(damage);
+        System.out.println("Dragon damages ");
     }
+
 
     @Override
     public void attack(Entity target) {
@@ -28,6 +26,7 @@ public  class Skeleton extends Enemy {
         else {
             super.attack(target);
         }
+
     }
 
     @Override
@@ -54,5 +53,4 @@ public  class Skeleton extends Enemy {
     public int getMaxMP() {
         return 0;
     }
-
 }
