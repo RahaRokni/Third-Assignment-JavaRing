@@ -100,18 +100,20 @@ public class Main {
             System.out.println(selectedLocation.getDescription());
             System.out.println();
                 boolean playerDefeated = false;
+                boolean leavedLocation = false;
                 for (Enemy enemy : enemies) {
                     if (!playerDefeated) {
                         System.out.println("An enemy " + enemy.getName() + " appears!");
                         boolean enemyDefeated = false;
 
-                        while (!enemyDefeated && !playerDefeated) {
+                        while (!enemyDefeated && !playerDefeated && !leavedLocation) {
                             System.out.println("you have: " + player.getHp()+ " hp and " + player.getMp() + " mp and your enemy " + enemy.getName() + " has " + enemy.getHp()+ " hp");
                             System.out.println();
                             System.out.println("\nWhat would you like to do?");
                             System.out.println("1. Attack");
                             System.out.println("2. Use Ability");
                             System.out.println("3. Run Away");
+                            System.out.println("4. Change Location");
                             int actionChoice = scanner.nextInt();
 
                             switch (actionChoice) {
@@ -159,6 +161,12 @@ public class Main {
                                     }else {
                                         System.out.println("You can't run away :(!");
                                     }
+                                    break;
+
+                                case 4:
+                                    System.out.println("You decide to leave the " + selectedLocation.getName() + " and choose another location.");
+                                    leavedLocation = true;
+                                    enemyDefeated = true;
                                     break;
 
                                 default:

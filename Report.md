@@ -65,7 +65,7 @@ This is a simple text-based adventure game implemented in Java. The game allows 
 
 3. **Combat**:
    - The player encounters enemies in the selected location.
-   - The player can choose to attack, use an ability, or run away.
+   - The player can attack, use an ability, run away, or change the location.
    - Combat continues until the player or the enemy is defeated.
 
 4. **Game Over**:

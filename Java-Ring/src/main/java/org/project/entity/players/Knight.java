@@ -3,6 +3,7 @@ import org.project.entity.Entity;
 import org.project.entity.enemies.Enemy;
 import org.project.object.armors.Armor;
 import org.project.object.consumables.Consumable;
+import org.project.object.consumables.Flask;
 import org.project.object.weapons.Weapon;
 
 import javax.xml.crypto.dsig.spec.XSLTTransformParameterSpec;
@@ -12,7 +13,7 @@ public class Knight extends Player {
     int countRounds = 0;
     private Armor armor;
     public Knight(String name, int hp, int mp,Weapon weapon, Armor armor, Consumable consumable) {
-        super(name, hp, mp,null,armor,null);
+        super(name, hp, mp,weapon,armor, consumable);
 
     }
 
@@ -31,7 +32,6 @@ public class Knight extends Player {
 
     @Override
     public void attack(Entity target) {
-        countRounds++;
-        target.takeDamage(weapon.getDamage());
+        super.attack(target);
     }
 }
