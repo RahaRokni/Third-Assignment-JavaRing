@@ -6,12 +6,14 @@ public abstract class Armor {
     private int maxDefense;
     private int durability;
     private int maxDurability;
-
     private boolean isBroke;
 
     public Armor(int defense, int durability) {
         this.defense = defense;
+        this.maxDefense = defense;
         this.durability = durability;
+        this.maxDurability = durability;
+        this.isBroke = false;
     }
 
     public void checkBreak() {
@@ -23,10 +25,16 @@ public abstract class Armor {
 
     // TODO: (BONUS) UPDATE THE REPAIR METHOD
     public void repair() {
-        isBroke = false;
-        defense = maxDefense;
-        durability = maxDurability;
+        if (isBroke) {
+            isBroke = false;
+            defense = maxDefense;
+            durability = maxDurability;
+            System.out.println("Armor has been repaired.");
+        } else {
+            System.out.println("Armor is not broken and does not need repair.");
+        }
     }
+
 
     public int getDefense() {
         return defense;
@@ -38,5 +46,21 @@ public abstract class Armor {
 
     public boolean isBroke() {
         return isBroke;
+    }
+
+    public void reduceDurability(int amount) {
+        if (!isBroke) {
+            System.out.println("Armor protected you from enemy attack.");
+            durability -= amount;
+            checkBreak();
+            if (isBroke) {
+                System.out.println("Armor has broken!");
+            }
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Defense: " + defense + ", Durability: " + durability + ", Broken: " + isBroke;
     }
 }

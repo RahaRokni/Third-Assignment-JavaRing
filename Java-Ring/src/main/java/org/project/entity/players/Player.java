@@ -1,31 +1,36 @@
 package org.project.entity.players;
 
 import org.project.entity.Entity;
+import org.project.entity.enemies.Enemy;
 import org.project.object.armors.Armor;
 import org.project.object.weapons.Weapon;
+import org.project.object.consumables.Consumable;
 
 // TODO: UPDATE IMPLEMENTATION
-public abstract class Player {
+public abstract class Player implements Entity {
     protected String name;
     Weapon weapon;
     Armor armor;
+    Consumable consumable;
     private int hp;
-    private int maxHP;
+    private int maxHP = 100;
     private int mp;
-    private int maxMP;
+    private int maxMP = 50;
 
-    public Player(String name, int hp, int mp, Weapon weapon, Armor armor) {
+    public Player(String name, int hp, int mp, Weapon weapon, Armor armor, Consumable consumable) {
         this.name = name;
         this.hp = hp;
         this.mp = mp;
-
         this.weapon = weapon;
         this.armor = armor;
+        this.consumable = consumable;
     }
 
     @Override
     public void attack(Entity target) {
+        weapon.use(target);
         target.takeDamage(weapon.getDamage());
+        this.mp += 5;
     }
 
     @Override
@@ -36,14 +41,18 @@ public abstract class Player {
     // TODO: (BONUS) UPDATE THE FORMULA OF TAKING DAMAGE
     @Override
     public void takeDamage(int damage) {
-        hp -= damage - armor.getDefense();
+        if (!armor.isBroke()) {
+            armor.reduceDurability(damage);
+        } else {
+            hp -= damage;
+        }
     }
 
     @Override
     public void heal(int health) {
         hp += health;
-        if (hp > maxHP) {
-            hp = maxHP;
+        if (hp > 100) {
+            hp = 100;
         }
     }
 
@@ -84,6 +93,28 @@ public abstract class Player {
 
     public Armor getArmor() {
         return armor;
+    }
+
+    public void castingSpell ()
+    {
+        this.hp += 10;
+        this.mp -= 20;
+    }
+
+    public void visibilityMp() {
+        this.mp -= 15;
+    }
+
+    public void runAway ()
+    {
+        this.hp -= 40;
+        this.mp -= 15;
+    }
+
+    public void getEnemyHp ()
+    {
+        this.hp += 70;
+        this.mp += 15;
     }
 
 }
